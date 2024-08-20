@@ -1,0 +1,39 @@
+/*
+O corpo da página deve ter fundo cinza (#ddd). 
+A fonte deve ser “Helvetica Neue”, na cor #444 e com espaçamento entre linhas de 1,5.
+O corpo deve ocupar 60% da largura e deve ser centralizado horizontalmente
+*/
+body {
+    text-decoration: color(#444);
+    background-color: #ddd;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    width: 60%;
+    margin: 0 auto;
+    padding: 2% 0;
+}
+
+/*
+A parte principal da página (<main>) deve ter fundo branco. Não é necessário colocar os
+cantos arredondados
+*/
+main {
+    background-color: white;
+    padding: 2rem;
+}
+
+
+/* Os títulos <h1> e <h2> devem aparecer na cor RGB: 140, 76, 8 */
+:is(h1, h2) {
+    color: rgb(140, 76, 8);
+}
+
+/*
+Crie uma regra CSS para moficiar os elementos <section> da página e acrescente as
+declarações a seguir para que uma borda superior seja inserida no início de cada seção
+*/
+section {
+    margin-top: 0px;
+    padding-bottom: 5px;
+    border-top: solid 1px gray
+}
