@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro - Clinica Vida Plena</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Clínica Vida Plena</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="cadastro.html">Cadastro</a></li>
+      </ul>
+    </nav>
+    <main>
+      <form action="cadastraCliente.php" method="post">
+        <fieldset>
+          <h3>Dados Pessoais</h3>
+          <p>
+            Nome:
+            <input
+              type="text"
+              id="name"
+              name="name"
+              minlength="2"
+              maxlength="50"
+              required
+            />
+          </p>
+          <p>
+            Email:
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="email@email.com"
+              required
+            />
+          </p>
+          <p>
+            CPF:
+            <input
+              type="text"
+              id="cpf"
+              name="cpf"
+              placeholder="000.000.000-00"
+              pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+              required
+            />
+          </p>
+          <p>Idade: <input type="number" id="age" name="age" required /></p>
+          <p>Telefone: <input type="tel" id="phone" name="phone" required /></p>
+          <p>
+            Data de Nascimento:
+            <input type="date" id="birthDate" name="birthDate" />
+          </p>
+          <fieldset>
+            <legend>Sexo:</legend>
+            <div>
+              <input
+                type="radio"
+                id="masculino"
+                name="sexo"
+                value="masculino"
+              />
+              Masculino
+              <input type="radio" id="feminino" name="sexo" value="feminino" />
+              Feminino
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Estado Civil:</legend>
+            <div>
+              <input
+                type="radio"
+                id="solteiro"
+                name="estadoCivil"
+                value="solteiro"
+              />
+              Solteiro
+              <input
+                type="radio"
+                id="casado"
+                name="estadoCivil"
+                value="casado"
+              />
+              Casado
+              <input
+                type="radio"
+                id="divorciado"
+                name="estadoCivil"
+                value="divorciado"
+              />
+              Divorciado
+            </div>
+          </fieldset>
+          <p>
+            Número de Identificação:
+            <input
+              type="text"
+              id="idNumber"
+              name="idNumber"
+              value="ID123456"
+              readonly
+            />
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <h3>Endereço</h3>
+          <p>CEP: <input type="text" id="cep" name="cep" required /></p>
+          <p>
+            Tipo de Logradouro:
+            <select id="tipoLogradouro" name="tipoLogradouro" required>
+              <option value="">Selecione</option>
+              <option value="Rua">Rua</option>
+              <option value="Avenida">Avenida</option>
+              <option value="Praça">Praça</option>
+            </select>
+          </p>
+          <p>
+            Logradouro:
+            <input type="text" id="logradouro" name="logradouro" required />
+          </p>
+          <p>
+            Cidade: <input type="text" id="cidade" name="cidade" required />
+          </p>
+          <p>
+            Estado: <input type="text" id="estado" name="estado" required />
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <h3>Informações Adicionais</h3>
+          <fieldset>
+            <legend>Interesses</legend>
+            <div>
+              <input
+                type="checkbox"
+                id="filmes"
+                name="interesses[]"
+                value="filmes"
+              />
+              <label for="filmes">Filmes</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="informatica"
+                name="interesses[]"
+                value="informatica"
+              />
+              <label for="informatica">Informática</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="games"
+                name="interesses[]"
+                value="games"
+              />
+              <label for="games">Games</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="livros"
+                name="interesses[]"
+                value="livros"
+              />
+              <label for="livros">Livros</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="roupas"
+                name="interesses[]"
+                value="roupas"
+              />
+              <label for="roupas">Roupas</label>
+            </div>
+          </fieldset>
+          <p>
+            Mais Informações:
+            <textarea id="maisInfo" name="maisInfo" cols="70"> </textarea>
+          </p>
+          <p>
+            Foto de Cadastro:
+            <input type="file" id="fotoCadastro" name="fotoCadastro" />
+          </p>
+          <input type="hidden" name="csrfToken" value="secureToken123" />
+        </fieldset>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </main>
+    <footer>
+      <i
+        >Clínica Vida Plena Rua da Saúde, 123, Sala 45 Centro, São Paulo - SP,
+        01000-000 Brasil
+      </i>
+    </footer>
+  </body>
+</html>
