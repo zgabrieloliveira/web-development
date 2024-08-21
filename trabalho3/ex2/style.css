@@ -1,0 +1,143 @@
+/* item 1 - aprimorando o estilo geral das páginas */
+
+title, h1 {
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+h2, h3 {
+    color:darkgreen;
+    font-weight: bold;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    background-color: whitesmoke;
+    font-family: Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: darkseagreen;
+    padding: 10px;
+    text-align: center;
+    color: whitesmoke;
+}
+
+
+form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+button {
+    justify-content: center;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: darkseagreen;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 100px;
+    min-height: 50px;
+}
+
+/* classe utilizada para destacar a página em que o usuário se encontra no elemento nav */
+.currentPage {
+    color: whitesmoke;
+    font-weight: bold; 
+    border-bottom: 2px solid whitesmoke;
+}
+
+/* item 2 / item 6 - seletor de irmão adjacente + pseudo-classe + pseu-elemento: afeta span que vier imediatamente após inputs que forem VÁLIDOS */
+input:valid + span::after {
+    content: '✓';
+    color: limegreen
+}
+
+/* item 2 / item 6 - seletor de irmão adjacente + pseudo-classe + pseu-elemento: afeta span que vier imediatamente após inputs que forem INVÁLIDOS */
+input:invalid + span::after {
+    content: '✗';
+    color: red;
+}
+
+/* item 3 - seletor de id: afeta apenas o elemento com id correspondente */
+#presentation-table {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* item 4 - seletor de classe: centraliza elementos dessa classe */
+.center {
+    text-align: center;
+}
+
+/* item 5 - seletor de descendente: afeta todos os li descendentes de uma ul */
+ul li {
+    flex: 1; /* Cada item da lista ocupará o mesmo espaço */
+    text-align: center;
+}
+
+/* item 7 - pseudoclasses: se o link já estiver sido visitado, ele vai ficar em verde escuro */
+a:link, a:visited {
+    color: darkgreen;
+    text-decoration: none;
+}
+
+/* item 7 - pseudoclasses: quando o usuário passar encima do link, ele muda pra cor whitesmoke */
+a:hover {
+    color: whitesmoke;
+}
+
+/* item 8- has: afeta todo fieldset que tem h3, no caso, cada tipo de conjunto de dados na tela de cadastro */
+fieldset:has(h3) {
+    border: 2px solid #ddd;
+    padding: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* item 9 - is: atinge todos os elementos de seus parâmetros */
+:is(header,nav) {
+    background-color: darkseagreen;
+    padding: 10px;
+    text-align: center;
+}
+
+/* item 10 - first-child: atinge todos os h2 primogênitos, logo, os títulos da Home serão afetados */
+h2:first-child {
+    background-color: rgb(215, 228, 215);
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* item 11 - first-of-type: atinge o primeiro article de cada página*/
+table:first-of-type {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border: 2px solid #ddd;
+}
+
+/* seletor de filho: afeta apenas uma ul que seja filha de uma nav */
+nav > ul {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+/* esconde o símbolo até que haja conteúdo, isto é, quando o placeholder desaparecer */
+input:placeholder-shown + span::after {
+    content: '';
+}
