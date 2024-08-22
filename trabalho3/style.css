@@ -61,8 +61,6 @@ body {
     /* remove sublinhado */
     color: #007BFF;
     font-weight: bold;
-    transition: color 0.3s ease;
-    /* transição suave de cor */
   }
 
   ol li a:hover {
