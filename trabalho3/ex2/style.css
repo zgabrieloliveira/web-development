@@ -14,7 +14,7 @@ body {
     height: 100%;
     margin: 0;
     background-color: whitesmoke;
-    font-family: Segoe UI, Helvetica, Arial, sans-serif;
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 1.2em;
 }
 
@@ -81,7 +81,8 @@ input:invalid + span::after {
 
 /* item 5 - seletor de descendente: afeta todos os li descendentes de uma ul */
 ul li {
-    flex: 1; /* Cada item da lista ocupará o mesmo espaço */
+    display: inline-block;
+    padding: 0 2%; /* Cada item da lista ocupará o mesmo espaço */
     text-align: center;
 }
 
@@ -128,8 +129,6 @@ table:first-of-type {
 
 /* seletor de filho: afeta apenas uma ul que seja filha de uma nav */
 nav > ul {
-    flex-direction: row;
-    display: flex;
     justify-content: space-between;
     list-style-type: none;
     padding: 0;

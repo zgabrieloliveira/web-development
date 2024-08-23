@@ -1,10 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    color: #333;
     /* cor padrão para texto */
-    display: flex;
-    flex-direction: column;
+    color: #333;
     /* elementos posicionados verticalmente */
     justify-content: center;
     /* centraliza os elementos verticalmente */
