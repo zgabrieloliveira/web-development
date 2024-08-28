@@ -1,36 +1,28 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #e0e0e0;
-    /* cor padrão para texto */
     color: #555151;
-    /* elementos posicionados verticalmente */
-    justify-content: center;
-    /* centraliza os elementos verticalmente */
-    align-items: center;
-    /* centraliza os elementos horizontalmente */
 }
 
 header {
-    margin-bottom: 20px;
-    /* +20px abaixo do header */
-    text-align: center;
-    /* centraliza o texto */
+    margin-bottom: 20px; /* espaçamento externo de 20px */
+    text-align: center; /* centraliza texto contido no header */
 }
 
 nav {
     background-color: #555151;
     padding: 10px;
-    text-align: center;
-    position: sticky;
-    top: 0;
+    text-align: center; /* centraliza texto contido no header */
+    position: sticky; /* requisito do trabalho */
+    top: 0; /* requisito do trabalho */
 }
 
 main {
     background-color: white;
-    padding: 2rem;
-    width: 70%;
-    margin: 0 auto;
-    box-shadow: 0 0 5px #d3cccc;
+    padding: 2rem; /* espaçamento interno de 2x o tamanho do elemento raíz */
+    width: 70%; /* ocupa 70% da largura disponível */
+    margin: 0 auto; /* centraliza o conteúdo */
+    box-shadow: 0 0 5px #d3cccc; 
 }
 
 footer {
@@ -43,32 +35,26 @@ footer {
 /* seletor de filho: afeta apenas uma ul que seja filha de uma nav */
 nav > ul {
     justify-content: space-between;
-    list-style-type: none;
-    padding: 0;
-    margin: 0.5rem;
-    width: 100%;
+    padding: 0; /* remove o espaçamento padrão para elementos ficarem centralizados */
+    margin: 0.5rem; /* espaçamento externo de 0.5x o tamanho do elemento raíz */
+    width: 100%; /* ocupa 100% da largura disponível */
 }
 
 /* seletor de descendente: afeta todos os li descendentes de uma ul */
 ul li {
-    display: inline-block;
-    padding: 0 2%; /* Cada item da lista ocupará o mesmo espaço */
-    text-align: center;
+    display: inline-block; /* apresentação da lista é em linha */
+    padding: 0 2%; /* espaçamento entre o itens */
 }
 
+/* estilo dos links */
 a:link, a:visited {
     color: #f4f4f4;
-    text-decoration: none;
+    text-decoration: none; /* remove o sublinhado padrão */
 }
 
-/* item 7 - pseudoclasses: quando o usuário passar encima do link, ele muda pra cor whitesmoke */
+/* pseudoclasses: quando o usuário passar encima do link, ele muda pra cor whitesmoke */
 a:hover {
     color: whitesmoke;
-}
-
-
-form {
-    display: flex;
 }
 
 /* classe utilizada para destacar a página em que o usuário se encontra no elemento nav */
