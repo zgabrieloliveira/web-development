@@ -30,7 +30,6 @@ footer {
 header {
     padding: 1.5rem;
     border-radius: 10px;
-    margin-bottom: 20px;
     /* +20px abaixo do header */
     text-align: center;
     /* centraliza o texto */
@@ -48,12 +47,14 @@ img {
 }
 
 nav {
+    margin-top: 0.5rem;;
     border-radius: 10px;
     background-color: #555151;
     padding: 10px;
     text-align: center;
     position: sticky;
     top: 0;
+    /* margin-bottom: 20px; */
 }
 
 main {
