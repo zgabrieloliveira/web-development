@@ -20,8 +20,8 @@ input:focus {
 
 /* configuração visual do símbolo inserido */
 button .material-symbols-outlined {
-    margin-right: 1.5rem; /* espaçamento externo de 1.5x o elemento raíz */
     font-size: 18px; /* diminui tamanho do ícone */
+    vertical-align: bottom;
 }
 
 main {
