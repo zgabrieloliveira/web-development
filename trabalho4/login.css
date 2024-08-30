@@ -2,35 +2,36 @@ body {
     font-family: Arial, sans-serif;
     background-color: #e0e0e0;
     color: #555151;
-    justify-content: center;
-    align-items: center;
 }
 
 input, button {
     width: 100%;
-    padding: 0.4rem;
-    margin: 0.5rem 0;
-    outline: none;
-    border: 0.5px solid grey;
-    box-sizing: border-box;
+    padding: 0.4rem; /* espaçamento interno de 0.4x o tamanho do elemento raíz */
+    margin: 0.5rem 0; /* espaçamento externo (superior e inferior) de 0.5x do tamanho do elemento raíz */
+    outline: none; /* remove borda padrão do input */
+    border: 0.5px solid grey; /* borda de 0.5px cinza */
+    box-sizing: border-box; /* cálculos contabilizados no tamanho da borda do elemento */
 }
 
+/* quando input está em foco, ele fica sombreado */
 input:focus {
     box-shadow: 0 0 5px grey;
 }
 
+/* configuração visual do símbolo inserido */
 button .material-symbols-outlined {
-    margin-right: 1.5rem; 
-    font-size: 18px; 
+    margin-right: 1.5rem; /* espaçamento externo de 1.5x o elemento raíz */
+    font-size: 18px; /* diminui tamanho do ícone */
 }
 
 main {
-    max-width: 300px;
+    max-width: 300px; /* requisito do trabalho */
     background-color: white;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0px 0px 5px #696565;
-    position: absolute;
+    /* ajustes para posicionamento central */
+    position: absolute; 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

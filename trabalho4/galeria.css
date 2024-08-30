@@ -1,16 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #e0e0e0;
-    /* cor padrão para texto */
     color: white;
-    /* elementos posicionados verticalmente */
-    justify-content: center;
-    /* centraliza os elementos verticalmente */
-    align-items: center;
-    /* centraliza os elementos horizontalmente */
-    padding: 2rem;
-    width: 70%;
-    margin: 0 auto;
+    padding: 2rem; /* espaçamento interno de 2x o tamanho do elemento raíz */
+    width: 70%; /* ocupa 70% da largura disponível */
+    margin: 0 auto; /* centraliza o conteúdo */
 }
 
 h2 {
@@ -18,49 +12,46 @@ h2 {
 }
 
 footer {
-    margin-top: 0.5rem;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    background-color: #555151;
+    margin-top: 0.5rem; /* espaçamento externo de 0.5x o tamanho do elemento raíz */
+    border-radius: 10px; /* bordas arredondadas */
+    padding: 1rem;  /* espaçamento interno de 1x o tamanho do elemento raíz */
+    text-align: center; /* centraliza o texto */
+    background-color: #555151; 
     color: white;
-    font-size:smaller;
+    font-size:smaller; 
 }
 
 header {
-    padding: 1.5rem;
+    padding: 2rem; /* espaçamento interno de 2x o tamanho do elemento raíz */
     border-radius: 10px;
-    margin-bottom: 20px;
-    /* +20px abaixo do header */
-    text-align: center;
-    /* centraliza o texto */
+    text-align: center; 
     background-color: #555151;
 }
 
 img {
     border-radius: 10px;
     box-shadow: 3px 3px 4px #7c7878;
-    height: 14vh;
-    width: 12vw;
+    height: 14vh; /* 14% da altura referente ao viewport */
+    width: 12vw; /* 12% da largura referente ao viewport */
     margin: 10px;
-    display: flex;
     box-sizing: border-box;
 }
 
 nav {
+    margin-top: 0.5rem;;
     border-radius: 10px;
     background-color: #555151;
     padding: 10px;
     text-align: center;
-    position: sticky;
-    top: 0;
+    position: sticky; /* requisito do trabalho */
+    top: 0; /* requisito do trabalho */
 }
 
 main {
-    margin-top: 0.5rem;
-    border-radius: 10px;
-    background-color: white;
-    padding: 2rem;
+    margin-top: 0.5rem; /* espaçamento externo de 0.5x o tamanho do elemento raíz */
+    border-radius: 10px; 
+    background-color: white; 
+    padding: 2rem; 
     box-shadow: 0 0 5px #d3cccc;
 }
 
@@ -80,12 +71,13 @@ ul li {
     text-align: center;
 }
 
+/* estilo dos links */
 a:link, a:visited {
     color: #f4f4f4;
     text-decoration: none;
 }
 
-/* item 7 - pseudoclasses: quando o usuário passar encima do link, ele muda pra cor whitesmoke */
+/* pseudoclasses: quando o usuário passar encima do link, ele muda pra cor whitesmoke */
 a:hover {
     color: whitesmoke;
 }
