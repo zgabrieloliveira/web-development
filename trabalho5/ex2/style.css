@@ -1,0 +1,73 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0e0e0;
+    /* cor padrão para texto */
+    color: #555151;
+    /* centraliza os elementos verticalmente */
+    align-items: center;
+}
+
+/* REQUISITO: header com fundo cinza */
+header {
+    background-color: #555151;
+    color: whitesmoke;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: smaller;
+}
+
+main {
+    padding: 2rem 0 ;
+    /* REQUISITO: main deve ter 70% de largura 
+    e estar centralizada horizontalmente */
+    width: 70%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* REQUISITO: cada card deve ter um preco */
+.price-tag {
+    color: red;
+    font-weight: bold;
+}
+
+.product-card {
+    align-items: flex-start;
+    align-content: center;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 0px 2px #696565;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* REQUISITO: largura base de 250px e maxima de 350px */
+    flex: 1 1 250px;
+    max-width: 350px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* REQUISITO: quando a largura do viewport do dispositivo 
+for <= 400px, o body ocupa 100% do vw */
+@media (max-width: 400px) {
+    main {
+        width: 100%;
+    }
+}
