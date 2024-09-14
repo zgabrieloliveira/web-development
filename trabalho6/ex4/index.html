@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interação JS-DOM</title>
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1>Explicando a Interação JS-DOM</h1>
+        <p>
+          Na página HTML sugerida, acontece a interação da DOM com JavaScript. O
+          script está inserido dentro do próprio documento HTML.
+        </p>
+
+        <p>
+          Primeiramente, a constante output recebe o elemento pre do documento
+          HTML via querySelector com ID. O conteúdo de output (textContent) vai
+          ser concatenado durante toda a execução do script. Desse modo, ocorre
+          um loop que percorre todos os filhos do elemento body do documento
+          HTML, ou seja, tudo que está dentro dele. Dentro desse loop, o
+          protótipo de todos os objetos filhos de body é acessado, e o atributo
+          textContent de output vai ser concatenado com cada protótipo, seguido
+          de uma quebra de linha. Ficando então nesse formato: [object
+          HTMLHeadElement]. Uma observação é que a quebra de linha na
+          concatenação e os espaços entre o texto são coonsiderados, por isso a
+          cada elemento há um [object text] antes.
+        </p>
+
+        <p>
+          Após o loop, a constante input recebe o elemento input do documento
+          HTML via querySelector pelo seu ID. O atributo textContent de output
+          vai ser concatenado com o resultado da expressão instanceof sobre a
+          constante input. Essa expressão retorna true se um elemento é do tipo
+          correspondente ao segundo argumento ("oi" instanceof String -
+          retornaria true, por exemplo). Logo, Input é do tipo HTMLInputElement,
+          assim, todas essas operações resultam em true por conta da hierarquia
+          da árvore DOM: EventTarget > Node > Element > HTMLElement >
+          HTMLInputElement, ou seja, todo HTMLInputElement e todos os outros
+          tipos anteriores a ele.
+        </p>
+      </article>
+    </main>
+  </body>
+</html>

@@ -65,3 +65,12 @@ body {
   ol li a:hover {
     color: #0056b3;
   }
+
+  input, button {
+    width: 100%;
+    padding: 0.4rem; /* espaçamento interno de 0.4x o tamanho do elemento raíz */
+    margin: 0.5rem 0; /* espaçamento externo (superior e inferior) de 0.5x do tamanho do elemento raíz */
+    outline: none; /* remove borda padrão do input */
+    border: 0.5px solid grey; /* borda de 0.5px cinza */
+    box-sizing: border-box; /* cálculos contabilizados no tamanho da borda do elemento */
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Peso Ideal</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+
+  <body>
+    <main>
+      <h1>Calculadora de Peso Ideal</h1>
+      <form action="resultado.php" method="post">
+        <label for="height">Altura:</label>
+        <input type="text" name="height" id="height" required />
+        <fieldset>
+          <legend>Sexo</legend>
+          <label for="feminine">Feminino:</label>
+          <input type="radio" name="gender" id="feminine" value="feminine" />
+          <label for="masculine">Masculino:</label>
+          <input type="radio" name="gender" id="masculine" value="masculine" required />
+        </fieldset>
+        <button type="button">Calcular</button>
+      </form>
+
+      <p id="result"></p>
+      
+    </main>
+
+    <script src="script.js"></script>
+
+  </body>
+</html>
