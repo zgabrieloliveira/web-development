@@ -1,0 +1,54 @@
+body {
+    text-decoration: #444; 
+    background-color: #ddd;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    width: 60%;
+    margin: 0 auto;
+    padding: 2% 0;
+}
+
+main {
+    background-color: white;
+    padding: 2rem;
+}
+
+
+/* h1 e h2 devem aparecer na cor RGB: 140, 76, 8 */
+:is(h1, h2) {
+    color: rgb(140, 76, 8);
+}
+
+h2 {
+    user-select: none;
+}
+
+section {
+    margin-top: 0px; /* 0px acima */
+    padding-bottom: 5px; /* 5px abaixo */
+    border-top: solid 1px gray /* linha cinza acima */
+}
+
+/* classe para tabelas de apresentação e relação de dados */
+.data-table {
+    align-items: center;
+    width: 85%;
+    border-collapse: collapse;
+    border: #444;
+    margin-bottom: 20px;
+}
+
+.data-table tr:hover {
+    background-color: #e0e0e0; /* cor de fundo ao passar o mouse */
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #444; /* cor cinza escuro */
+    padding: 10px; /* espaço dentro das células */
+    text-align: left; /* alinha o texto à esquerda */
+}
+
+.data-table thead {
+    background-color: #f4f4f4; /* c de fundo para o cabeçalho da tabela */
+    font-weight: bold; /* negrito */
+}
