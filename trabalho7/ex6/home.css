@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0e0e0;
+    /* cor padrão para texto */
+    color: #555151;
+    /* elementos posicionados verticalmente */
+    justify-content: center;
+    /* centraliza os elementos verticalmente */
+    align-items: center;
+}
+
+header {
+    margin-bottom: 20px;
+    /* +20px abaixo do header */
+    text-align: center;
+    /* centraliza o texto */
+}
+
+nav {
+    background-color: #555151;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+main {
+    background-color: white;
+    padding: 2rem;
+    width: 70%;
+    margin: 0 auto;
+    box-shadow: 0 0 5px #d3cccc;
+}
+
+footer {
+    padding: 10px;
+    text-align: center;
+    color: #555151;
+    font-size:smaller;
+}
+
+/* seletor de filho: afeta apenas uma ul que seja filha de uma nav */
+nav > ul {
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    margin: 0.5rem;
+    width: 100%;
+}
+
+/* seletor de descendente: afeta todos os li descendentes de uma ul */
+ul li {
+    display: inline-block;
+    padding: 0 2%; /* Cada item da lista ocupará o mesmo espaço */
+    text-align: center;
+}
+
+.tabs section.active-tab{
+    display: block; /* exibe a sessao ativa */
+}
+
+
+nav button {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+/* destaca botao no qual o usuario se encontra */
+nav button.active-button {
+    background-color: transparent;
+    color: whitesmoke;
+    font-weight: bold; 
+    border-bottom: 2px solid whitesmoke;
+}
+
+.tabs section {
+    display: none; /* retira as sessoes nao ativas do layout */
+}
