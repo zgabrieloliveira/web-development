@@ -26,6 +26,10 @@ nav {
     top: 0;
 }
 
+h2 {
+    text-align: center;
+}
+
 main {
     background-color: white;
     padding: 2rem;
