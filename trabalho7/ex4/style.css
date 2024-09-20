@@ -3,13 +3,11 @@ body, html {
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: Arial, sans-serif;
     background-color: #e0e0e0;
     color: #555151;
 }
-
 input, button {
     width: 100%;
     padding: 0.4rem; /* espaçamento interno de 0.4x o tamanho do elemento raíz */
@@ -18,18 +16,15 @@ input, button {
     border: 0.5px solid grey; /* borda de 0.5px cinza */
     box-sizing: border-box; /* cálculos contabilizados no tamanho da borda do elemento */
 }
-
 /* quando input está em foco, ele fica sombreado */
 input:focus {
     box-shadow: 0 0 5px grey;
 }
-
 /* configuração visual do símbolo inserido */
 button .material-symbols-outlined {
     font-size: 18px; /* diminui tamanho do ícone */
     vertical-align: bottom;
 }
-
 main {
     max-width: 300px; /* requisito do trabalho */
     background-color: white;
