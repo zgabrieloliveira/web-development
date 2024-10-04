@@ -1,0 +1,24 @@
+a) Todos os h5 são gerados via PHP com for. Verificando no navegador, apenas o HTML é mostrado. 
+
+b) XSS é ataque que injeta scripts de usuários em um site. É uma falha grave que pode levar a roubo de informações sensíveis, cookies, redirecionamento, etc. Apesar disso, é fácil de previnir.
+
+Após cadastro, os dados podem ser visualizados de duas maneiras:
+
+Página Vulnerável (listaContatos-vulneravel.php): Não sanitiza os dados antes de exibi-los, o que pode levar a ataques XSS.
+Página Segura (listaContatos.php): Sanitiza os dados usando htmlspecialchars(), prevenindo ataques XSS.
+
+c) Na página vulnerável, quando o usuário tenta visualizar a lista de contatos, o script JS é acionado e o usuário não consegue acessar o que pretendia rapidamente.
+Na outra página, isso não acontece e a visualização ocorre normalmente. 
+A diferença entre essas páginas, é que em "listaContatos.php" ocorre a sanitização de dados através da função htmlspecialchars() mitigando a vulnerabilidade a XSS. 
+
+d) Na página vulnerável, ocorre o redirecionamento pro site da UFU ao tentar visualizar a lista de contatos por causa do script JS. Na outra página isso não acontece, o nome do contato apenas fica com a string do script atribuída.
+
+e) Baixando o arquivo, é possível certificar que a cada novo cadastro, esses dados são transferidos para um arquivo txt buscando persistência de dados.
+
+f) contatos.php: uma classe para encapsular os atributos de um contato, contendo também uma função de armazená-lo ao final de contatos.txt.
+novoContato.html: consiste no elementos HTML do formulário a ser preenchido pelo usuário.
+listaCOntatos.php: carregados dados do arquivo contatos.txt, sanitiza-os e os apresenta numa tabela na página
+listaContatos-vulenravel.php: faz a mesma coisa que listaContatos.php, com a exceção da função htmlspecialchars(), que evita ataques XSS. 
+
+g) Ao enviar a informação de CEP no formato requerido, os campos restantes são preenchidos automaticamente. Isso acontece porque ao preencher o CEP, o dado é enviado ao backend e ele possui as informações de endereço relacionadas àquele CEP (funcionando apenas para 38400-100 e 38400-200).
+

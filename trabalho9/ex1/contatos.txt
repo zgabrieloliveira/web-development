@@ -1,0 +1,5 @@
+Fulano;fulano@mail.com;1234
+dskfkdsf;email@email.com;lsdfkfksfdk
+<h1>askdkas<h2>;sdjfjds@email.com;kdskdk
+<script>alert('Ataq. X S S')</script>;skdk@email.com;sdksdfks
+<script>window.location='http://www.ufu.br'</script>;skdka@gmail.com;askdkasd

@@ -1,0 +1,10 @@
+# Ativar o mecanismo de reescrita
+RewriteEngine On
+
+# Definir a base do diretório
+RewriteBase /semanais/
+
+# Reescrever URLs para diretórios e arquivos existentes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.html [L]
