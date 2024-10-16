@@ -1,0 +1,5 @@
+Ao teclar a chave de acesso 123456 e 38400-100 no CEP, no header da requisição estava indicando:
+Content-Type = application/json, pois isso foi especificado no script do frontend. 
+Content-Length = 63, indica o tamanho do corpo da requisição em bytes, ou seja, o tamanho do json enviado para o servidor.
+
+Falta responder: o que é apresentado em payload? o que significa?

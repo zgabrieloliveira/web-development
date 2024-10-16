@@ -1,0 +1,34 @@
+Item C:
+
+I) Teclando 38400-100, o código de resposta foi 200 porque no código PHP há um CEP correspondente ao requisitado, no caso, Uberlândia.
+II) Content-Type da resposta HTTP é text/html; charset=UTF-8. Isso porque não houve explicíta alteração nessa configuração, então ficou padrão.
+III) Uberlândia.
+IV) nginx.
+V) No header dessa requisição em específico (GET), não está presente. Trata-se de um método GET, que não possui corpo. 
+Se fosse um método POST, teria que haver um corpo na requisição com os dados enviados, assim, Content-Type estaria no header da requisição.
+
+Item D:
+
+I) Teclando 38400-500, o código foi 404, pois o recurso requisitado não foi encontrado. No código PHP, há apenas dois CEPs 
+que retornariam 200 e o dessa requisição não é um deles. 
+II) Similarmente ao item C, Content-Type da resposta HTTP é text/html; charset=UTF-8. Isso porque não houve 
+explicíta alteração nessa configuração, então ficou padrão.
+III) "38400-500 is not available". No código PHP, esse CEP não é encontrado, então a resposta enviada pelo servidor é "$cep is not available".
+IV) nginx.
+V) Similarmente ao item C, não está presente. Trata-se de um método GET, que não possui corpo. 
+Se fosse um método POST, teria que haver um corpo na requisição com os dados enviados, assim, Content-Type estaria no header da requisição.
+
+Item E: 
+
+Com display errors off, removi o fechamento de chave do else, já que nenhum dos ifs possuíam parênteses. Assim, o código do servidor está com erro de sintaxe. 
+O código retornado foi 500, indicando erro interno do servidor. Sobre o corpo da resposta, ele não ficou disponível para visualização.
+Nessa aba, estava a mensagem "Nenhum dado de resposta disponível nesta requisição".
+
+Item F: 
+
+Com display errors on, removi o fechamento de chave do else, já que nenhum dos ifs possuíam parênteses. Tanto o código retornado quanto o corpo da resposta foram diferentes. 
+O código retornado foi 200, porém, esse foi o conteúdo do corpo da resposta, tendo em vista que há erro de sintaxe no código:
+Parse error: Unclosed '{' on line 11 in /home/vol1_8/infinityfree.com/if0_37059328/htdocs/trabalho11/ex2-busca-cidade/busca-cidade.php on line 14
+
+Falta responder: Em qual situação essa configuração seria útil?
+Falta responder: Em qual situação ela jamais deveria ser utilizada?
