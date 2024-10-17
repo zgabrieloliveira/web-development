@@ -21,7 +21,7 @@
 <body>
 
   <div class="container">
-    <form name="buscaVeiculo" class="row g-3">
+    <form name="buscaVeiculo" action="get-veiculos.php" class="row g-3">
       <div>
         <label for="marca" class="form-label">Informe a marca do veículo</label>
         <select id="marca" name="marca" class="form-select">
@@ -43,35 +43,166 @@
   <script>
 
     function carregaMarcasDistintas() {
-      // complete o código para permitir que o primeiro <select> 
-      // seja carregado assim que a página for apresentada ao usuário. 
-      // O código JavaScript deve fazer uma requisição Ajax ao script get-marcas-php.      
+
+      // pega selects do formulário e limpa-os (porque a marca define o modelo)
+      const selectMarca = document.getElementById("marca"); 
+      const selectModelo = document.getElementById("modelo");
+      selectMarca.innerHTML = "";
+      selectModelo.innerHTML = ""; 
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "get-marcas.php"); // cliente está buscando por dados, então é GET, por padrão, a requisição é assíncrona
+      xhr.responseType = 'json'; // especifica que a resposta será um JSON
+
+      xhr.onload = () => {
+        if (xhr.status != 200 || xhr.response == null) {
+          console.error("Erro ao carregar marcas");
+          console.log(xhr.status);
+          return;
+        }
+        // foi especificado que a resposta será um JSON, então é possível acessar o json através do atributo response
+        const marcas = xhr.response;
+        // cria opções com cada marca recebida
+        marcas.forEach(marca => {
+          const option = document.createElement("option"); // cria um elemento option
+          option.value = marca.id; // atribui o valor do nome da marca à opção
+          option.textContent = marca.nome; // nome da marca é mostrada na opção
+          selectMarca.appendChild(option); // adiciona o option ao select
+        });
+
+      }
+
+      xhr.onerror = () => {
+        console.error("Erro de rede - requisição não finalizada");
+      }
+
+      xhr.send();
+
     }
 
     function carregaModelosDaMarca() {
-      // complete o código para que o segundo <select> seja carregado com base 
-      // na marca escolhida no primeiro <select>. A função deve fazer uma requisição Ajax
-      // ao script get-modelos.php. Adicione o código JavaScript para que a função seja 
-      // chamada na ocorrência do evento apropriado.
+
+      // pega select do modelo e limpa-o (sem tirar a marca, pois o form deve ser submetido com todos os dados)
+      const selectModelo = document.getElementById("modelo");
+      selectModelo.innerHTML = ""; 
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "get-modelos.php?marca=" + marca); // cliente está buscando por dados, então é GET, por padrão, a requisição é assíncrona
+      xhr.responseType = 'json'; // especifica que a resposta será um JSON
+
+      xhr.onload = () => {
+        if (xhr.status != 200 || xhr.response == null) {
+          console.error("Erro ao carregar modelos");
+          console.log(xhr.status);
+          return;
+        }
+        // foi especificado que a resposta será um JSON, então é possível acessar o json através do atributo response
+        const modelos = xhr.response;
+        // cria opções com cada marca recebida
+        modelos.forEach(modelo => {
+          const option = document.createElement("option"); // cria um elemento option
+          option.value = modelo.nome; // atribui o valor do nome do modelo à opção
+          option.textContent = modelo.nome; // nome do modelo é mostrado na opção
+          selectModelo.appendChild(option); // adiciona o option ao select
+        });
+
+      }
+
+      xhr.onerror = () => {
+        console.error("Erro de rede - requisição não finalizada");
+      }
+
+      xhr.send();
     }
 
-    function carregaVeiculosDoModelo() {
-      // complete o código para permitir que os dados de todos os veículos 
-      // do modelo escolhido sejam listados em uma tabela HTML, conforme figura apresentada
-      // no roteiro do exercício. A função deve fazer uma requisição Ajax ao script 
-      // get-veiculos.php. Ao receber os dados do servidor, esta função deve repassá-los 
-      // à função exibeVeiculos para exibição adequada.
+    // a requisição é assíncrona, então os dados obtidos nela não podem ser retornados diretamente
+    // assim, a função que utilizará esses dados é um parâmetro e será chamada quando a requisição for concluída
+    function carregaVeiculosDoModelo(e, exibeVeiculos) {
+
+      const modelo = document.forms.buscaVeiculo.modelo.value;
+      let veiculos = [];
+
+      if (modelo === "") {
+        console.error("Modelo deve ser selecionado");
+        exibeVeiculos(veiculos); // lista vazia
+        return;
+      }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "get-modelos.php?modelo=" + modelo); // cliente está buscando por dados, então é GET, por padrão, a requisição é assíncrona
+      xhr.responseType = 'json'; // especifica que a resposta será um JSON
+
+      xhr.onload = () => {
+        if (xhr.status != 200 || xhr.response == null) {
+          console.error("Erro ao carregar modelos");
+          console.log(xhr.status);
+          exibeVeiculos(veiculos); // lista vazia
+          return;
+        }
+        // foi especificado que a resposta será um JSON, então é possível acessar o json através do atributo response
+        veiculos = xhr.response; // pega a lista de veículos e a retorna
+        exibeVeiculos(veiculos); // chama a função que exibirá os veículos
+      }
+
+      xhr.onerror = () => {
+        console.error("Erro de rede - requisição não finalizada");
+        exibeVeiculos(veiculos); // lista vazia
+      }
+
+      xhr.send();
     }
 
     function exibeVeiculos(veiculos) {
-      // completo o código para que os dados dos veículos sejam apresentados dinamicamente
-      // na tabela HTML. Deve-se manipular a árvore DOM manipulando a árvore DOM e utilizar
-      // métodos como document.createElement.
+
+      const tabelaVeiculos = document.getElementById("tabelaVeiculos");
+      // limpa a tabela (caso haja uma busca anterior)
+      tabelaVeiculos.innerHTML = "";
+
+      // caso não haja veículos, exibe mensagem e sai da função
+      if (veiculos.length === 0) {
+        const h2 = document.createElement("h2");
+        h2.textContent = "Nenhum veículo encontrado";
+        tabelaVeiculos.appendChild(h2);
+        return;
+      }
+
+      // percorre lista de veículos recebidos e adiciona cada um à tabela
+      veiculos.forEach(veiculo => {
+        const veiculoLinha = document.createElement("tr"); // cria uma linha
+        // cria colunas que conterão os dados de cada veículo
+        const modeloColuna = document.createElement("td");
+        const anoColuna = document.createElement("td");
+        const corColuna = document.createElement("td");
+        const quilometragemColuna = document.createElement("td");
+        // atribui os valores dos atributos do veículo às colunas
+        modeloColuna.textContent = veiculo.modelo;
+        anoColuna.textContent = veiculo.ano;
+        corColuna.textContent = veiculo.cor;
+        quilometragemColuna.textContent = veiculo.quilometragem;
+        // adiciona as colunas à linha
+        veiculoLinha.appendChild(modeloColuna);
+        veiculoLinha.appendChild(anoColuna);
+        veiculoLinha.appendChild(corColuna);
+        veiculoLinha.appendChild(quilometragemColuna);
+        // adiciona linha na tabela 
+        tabelaVeiculos.appendChild(veiculoLinha);
+      });
+
     }
 
     //---------------------------------------------------------------------------------------
     // coloque aqui o código JavaScript "principal" a ser executado na ocorrência dos eventos
+    const selectMarca = document.getElementById("marca");
+    const selectModelo = document.getElementById("modelo");
+    const form = document.forms.buscaVeiculo;
 
+    selectMarca.addEventListener("change", carregaMarcasDistintas);
+    selectModelo.addEventListener("change", carregaModelosDaMarca);
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      carregaVeiculosDoModelo(e, exibeVeiculos);
+    });
 
   </script>
 

@@ -1,9 +1,10 @@
 <?php
 
+// classe que possuirá os dados de resultantes de uma tentativa de login
 class LoginResult
 {
-  public $isAuthorized;
-  public $newLocation;
+  public $isAuthorized; // booleano para indicar autenticação
+  public $newLocation; // string para indicar a nova localização para redirecionamento
 
   function __construct($isAuthorized, $newLocation)
   {
@@ -12,14 +13,19 @@ class LoginResult
   }
 }
 
-$email = $_POST['email'] ?? '';
+// recebendo dados do post 
+$email = $_POST['email'] ?? ''; 
 $senha = $_POST['senha'] ?? '';
 
 // Validação simplificada para fins didáticos. Não faça isso!
+
+// apenas com esses dados, retorna true e a nova localização: página home com uma mensagem de sucesso
 if ($email == 'fulano@mail.com' && $senha == '123456')
   $loginResult = new LoginResult(true, 'home.html');
+// se os dados não corresponderem, retorna false e não envia nova localização
 else
   $loginResult = new LoginResult(false, '');
 
+// especifica que a resposta é json
 header('Content-type: application/json');
-echo json_encode($loginResult);
+echo json_encode($loginResult); // envia resposta em json com o objeto resultante da operação

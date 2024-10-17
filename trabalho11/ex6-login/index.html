@@ -91,26 +91,34 @@
 
   <script>
     function sendForm(form) {      
-      let xhr = new XMLHttpRequest();    
+      let xhr = new XMLHttpRequest(); // instância do objeto XHR
+      // cliente está enviando dados do formulário, então faz POST
+      // acionando arquivo relacionado à action no form (arquivo php com o script que autentica login)
       xhr.open("POST", form.getAttribute("action"));
-      xhr.responseType = 'json';
+      xhr.responseType = 'json'; // especifica que um json será retornado pelo servidor
 
+      // função acionada quando a resposta da requisição chegar
       xhr.onload = function () {
+        // verifica status da resposta e se há conteúdo nela 
         if (xhr.status != 200 || xhr.response === null) {
           console.log("A resposta não pode ser obtida ");
           console.log(xhr.status);
           return;
         }
 
-        let loginResponse = xhr.response;
+        let loginResponse = xhr.response; // pega json de resposta
+        // no objeto convertido do json, há o atributo isAuthorized, que indica se o login foi bem-sucedido
         if (loginResponse.isAuthorized)
+          // se login for bem-sucedido, redireciona para a página home através do atributo newLocation
           window.location = loginResponse.newLocation;
         else {
+          // se login não for bem-sucedido, exibe mensagem de erro 
+          // selecionando o elemento p com a mensagem e removendo a classe hidden dele
           const pLoginFail = document.querySelector("#loginFailMsg");
           pLoginFail.classList.remove("hidden");
-          setTimeout(() => pLoginFail.classList.add("hidden"), 3000);
+          setTimeout(() => pLoginFail.classList.add("hidden"), 3000); // esconde a mensagem após 3 segundos
 
-          form.senha.value = "";
+          form.senha.value = ""; // reseta o campo de senha
           form.senha.focus();
         }
       }      
@@ -119,13 +127,14 @@
         console.error("Erro de rede - requisição não finalizada");
       };
 
-      xhr.send(new FormData(form));
+      xhr.send(new FormData(form)); // envia dados do formulário ao servidor
     }
 
-    const form = document.querySelector("#formLogin");
+    const form = document.querySelector("#formLogin"); // seleciona o formulário via ID
+    // atribui função para quando o formulário for submetido
     form.onsubmit = function (e) {
       e.preventDefault();
-      sendForm(form);
+      sendForm(form); // chama a função que envia o formulário
     }
   </script>
 
