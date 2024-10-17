@@ -1,0 +1,6 @@
+I) Teclando 38400-100, o código de resposta foi 200 porque há dados correspondentes no servidor.
+II) Content-Type da resposta HTTP é application/json. Isso porque antes de enviar a resposta, houve essa definição no header da resposta por parte do servidor.
+III) Um JSON com os dados do objeto de endereço criado no servidor. Sua forma bruta: {"rua":"Av Floriano","bairro":"Centro","cidade":"Uberl\u00e2ndia"}
+IV) nginx.
+V) No header dessa requisição em específico (GET), não está presente. Trata-se de um método GET, que não possui corpo. 
+Se fosse um método POST, teria que haver um corpo na requisição com os dados enviados, assim, Content-Type estaria no header da requisição.

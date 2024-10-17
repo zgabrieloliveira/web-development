@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Teste AJAX Simples</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 1.5rem;
+      background-image: url("images/bg2.jpg");
+      background-size: cover;
+      margin: 0;
+    }
+
+    main {
+      width: 60%;
+      background-color: #fff;
+      border: 0.5px solid #ccc;
+      margin: 0;
+      padding: 2% 4%;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <main>
+    <h1>Faculdade de Computação da UFU</h1>
+    <p>A Faculdade de Computação (FACOM) da Universidade...</p>
+    <p>No início dos anos 2000 foi criado na Faculdade...</p>
+    <button>Carregar mais conteúdo com Ajax</button>
+  </main>
+
+  <script>
+
+    // XMLHttpRequest é um objeto do JS que permite realizar requisições HTTP assíncronas, isto é, num processo separado do principal
+    // isso permite mais dinamismo e interatividade para o usuário, beneficiando também a performance de um sistema no geral
+
+    // função acionada quando o botão é clicado
+    function loadExtraContent() {
+      let xhr = new XMLHttpRequest(); // instância do objeto XHR
+      // método open() para abrir a conexão com o servidor, passando o método GET, o arquivo a ser requisitado (um novo HTML neste caso)
+      // e true para indicar que a requisição é assíncrona (se não colocar nada, o padrão é true)
+      xhr.open("GET", "conteudoAdicional.html", true); 
+
+      // função do objeto XHR que é acionada quando a requisição assíncrona for concluída, ela é chamada pelo navegador
+      xhr.onload = function () {
+        const main = document.querySelector("main"); // pega a main da página
+        main.insertAdjacentHTML("beforeend", xhr.responseText); // adiciona a resposta da requisição ao final da main
+        // PS: não há tratamento de erros nesse código
+      };
+      xhr.send(); // envia a requisição ao servidor
+    }
+    const button = document.querySelector("button"); // pega o botão da página
+    button.addEventListener("click", loadExtraContent); // adiciona um evento de clique ao botão, que chama a função loadExtraContent
+  </script>
+  
+</body>
+
+</html>
