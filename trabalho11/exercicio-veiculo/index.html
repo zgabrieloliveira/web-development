@@ -129,7 +129,7 @@
       }
 
       const xhr = new XMLHttpRequest();
-      xhr.open("GET", "get-modelos.php?modelo=" + modelo); // cliente está buscando por dados, então é GET, por padrão, a requisição é assíncrona
+      xhr.open("GET", "get-veiculos.php?modelo=" + modelo); // cliente está buscando por dados, então é GET, por padrão, a requisição é assíncrona
       xhr.responseType = 'json'; // especifica que a resposta será um JSON
 
       xhr.onload = () => {
@@ -196,8 +196,11 @@
     const selectModelo = document.getElementById("modelo");
     const form = document.forms.buscaVeiculo;
 
-    selectMarca.addEventListener("change", carregaMarcasDistintas);
-    selectModelo.addEventListener("change", carregaModelosDaMarca);
+    carregaMarcasDistintas();
+    selectMarca.onchange = carregaModelosDaMarca;
+
+    // selectMarca.onchange = carregaMarcasDistintas;
+    // selectModelo.onchange = carregaModelosDaMarca;
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
