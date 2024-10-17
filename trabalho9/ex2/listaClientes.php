@@ -35,8 +35,8 @@
       <tbody>
         <?php
         require "clientes.php";
-        $arrayClientes = carregaClientesEmArquivo();
-        foreach ($arrayClientes as $cliente) {
+        $arrayProdutos = carregaClientesEmArquivo();
+        foreach ($arrayProdutos as $cliente) {
           $nome = htmlspecialchars($cliente->nome);
           $cpf = htmlspecialchars($cliente->cpf);
           $email = htmlspecialchars($cliente->email);
