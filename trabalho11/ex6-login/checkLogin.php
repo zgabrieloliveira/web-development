@@ -19,6 +19,10 @@ $senha = $_POST['senha'] ?? '';
 
 // Validação simplificada para fins didáticos. Não faça isso!
 
+
+// só há redirecionamento se o email for fulano@mail.com e a senha 123456
+// caso contrário não há redirecionamento e uma mensagem de erro aparece abaixo dos campos
+
 // apenas com esses dados, retorna true e a nova localização: página home com uma mensagem de sucesso
 if ($email == 'fulano@mail.com' && $senha == '123456')
   $loginResult = new LoginResult(true, 'home.html');

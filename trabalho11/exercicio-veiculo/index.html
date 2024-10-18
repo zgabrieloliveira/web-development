@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
   <title>Desenvolvimento Web com Ajax</title>
@@ -44,7 +44,7 @@
 
     function carregaMarcasDistintas() {
 
-      // pega selects do formulário e limpa-os (porque a marca define o modelo)
+      // pega selects do formulário e limpa-os (porque a marca define os modelos)
       const selectMarca = document.getElementById("marca"); 
       const selectModelo = document.getElementById("modelo");
       selectMarca.innerHTML = "";
@@ -65,10 +65,12 @@
         // cria opções com cada marca recebida
         marcas.forEach(marca => {
           const option = document.createElement("option"); // cria um elemento option
-          option.value = marca.id; // atribui o valor do nome da marca à opção
-          option.textContent = marca.nome; // nome da marca é mostrada na opção
+          option.value = marca; // atribui o valor do nome da marca à opção
+          option.textContent = marca; // nome da marca é mostrada na opção
           selectMarca.appendChild(option); // adiciona o option ao select
         });
+
+        selectMarca.value = ""; // limpa o valor do select
 
       }
 
@@ -80,7 +82,9 @@
 
     }
 
-    function carregaModelosDaMarca() {
+    function carregaModelosDaMarca(selected) {
+
+      const marca = selected.target.value 
 
       // pega select do modelo e limpa-o (sem tirar a marca, pois o form deve ser submetido com todos os dados)
       const selectModelo = document.getElementById("modelo");
@@ -101,10 +105,12 @@
         // cria opções com cada marca recebida
         modelos.forEach(modelo => {
           const option = document.createElement("option"); // cria um elemento option
-          option.value = modelo.nome; // atribui o valor do nome do modelo à opção
-          option.textContent = modelo.nome; // nome do modelo é mostrado na opção
+          option.value = modelo; // atribui o valor do nome do modelo à opção
+          option.textContent = modelo; // nome do modelo é mostrado na opção
           selectModelo.appendChild(option); // adiciona o option ao select
         });
+
+        selectModelo.value = ""; // limpa o valor do select
 
       }
 
@@ -117,9 +123,9 @@
 
     // a requisição é assíncrona, então os dados obtidos nela não podem ser retornados diretamente
     // assim, a função que utilizará esses dados é um parâmetro e será chamada quando a requisição for concluída
-    function carregaVeiculosDoModelo(e, exibeVeiculos) {
+    function carregaVeiculosDoModelo(selected, exibeVeiculos) {
 
-      const modelo = document.forms.buscaVeiculo.modelo.value;
+      const modelo = selected.target.value;
       let veiculos = [];
 
       if (modelo === "") {
@@ -178,7 +184,7 @@
         modeloColuna.textContent = veiculo.modelo;
         anoColuna.textContent = veiculo.ano;
         corColuna.textContent = veiculo.cor;
-        quilometragemColuna.textContent = veiculo.quilometragem;
+        quilometragemColuna.textContent = `${veiculo.quilometragem}km`;
         // adiciona as colunas à linha
         veiculoLinha.appendChild(modeloColuna);
         veiculoLinha.appendChild(anoColuna);
@@ -190,22 +196,17 @@
 
     }
 
-    //---------------------------------------------------------------------------------------
-    // coloque aqui o código JavaScript "principal" a ser executado na ocorrência dos eventos
-    const selectMarca = document.getElementById("marca");
-    const selectModelo = document.getElementById("modelo");
-    const form = document.forms.buscaVeiculo;
-
-    carregaMarcasDistintas();
-    selectMarca.onchange = carregaModelosDaMarca;
-
-    // selectMarca.onchange = carregaMarcasDistintas;
-    // selectModelo.onchange = carregaModelosDaMarca;
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      carregaVeiculosDoModelo(e, exibeVeiculos);
-    });
+    window.onload = function () {
+      //---------------------------------------------------------------------------------------
+      // coloque aqui o código JavaScript "principal" a ser executado na ocorrência dos eventos
+      const selectMarca = document.getElementById("marca");
+      const selectModelo = document.getElementById("modelo");
+  
+      carregaMarcasDistintas(); // ao iniciar a página, já busca as marcas
+      selectMarca.onchange = carregaModelosDaMarca; // quando mudar a marca, busca modelos relacionados à ela
+      selectModelo.onchange = (e) => carregaVeiculosDoModelo(e, exibeVeiculos); // quando um modelo for selecionado, mostra a tabela
+      // código a ser executado quando a página carregar
+    }
 
   </script>
 

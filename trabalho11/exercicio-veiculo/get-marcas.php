@@ -14,7 +14,7 @@ try {
   // não há risco de SQL Injection, pois não há parâmetros fornecidos pelo usuário, 
   // então query() é mais apropriado que prepared statements
   $stmt = $pdo->query($sql);
-  $marcas = $stmt->fetchAll();
+  $marcas = $stmt->fetchAll(PDO::FETCH_COLUMN);
   echo json_encode($marcas);
 } 
 catch (Exception $e) {

@@ -11,3 +11,4 @@ else if ($cep == '38700-000')
 else {
   http_response_code(404);
   echo "$cep is not available";
+} 
