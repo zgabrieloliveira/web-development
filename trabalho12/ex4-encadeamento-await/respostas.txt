@@ -1,0 +1,13 @@
+Qual o valor das
+propriedades latitude e longitude da variável local?
+
+No meu caso:
+
+latitude: -19.0243
+longitude: -48.3428
+
+
+
+String JSON de resposta à requisição da api de clima:
+
+{"latitude":-19.0,"longitude":-48.375,"generationtime_ms":0.04696846008300781,"utc_offset_seconds":0,"timezone":"GMT","timezone_abbreviation":"GMT","elevation":803.0,"current_weather_units":{"time":"iso8601","interval":"seconds","temperature":"°C","windspeed":"km/h","winddirection":"°","is_day":"","weathercode":"wmo code"},"current_weather":{"time":"2024-10-25T21:15","interval":900,"temperature":26.6,"windspeed":4.7,"winddirection":360,"is_day":1,"weathercode":2}}

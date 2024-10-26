@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Encadeando requisições assíncronas</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 1.5rem;
+      background-color: #ddd;
+      color: #555;
+      margin: 0;
+    }
+
+    main {
+      width: 60%;
+      margin: 0;
+      padding: 2% 4%;
+      background-color: #eee;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    h1 {
+      font-size: 5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <h2>Temperatura Local: <span id="temp">...</span></h2>
+    <h2>Velocidade do Vento: <span id="wind">...</span></h2>
+  </main>
+  <script>
+
+    // OBS: A função não trata todos os erros
+
+    // essa função faz uma requisição assíncrona à uma APIs
+    function buscaClimaLocal() {
+      fetch('https://ipapi.co/json/') // busca informações de geolocalização através do IP do usuário
+        .then(response => response.json()) // converte a resposta em JSON de maneira assíncrona
+        // com o ip do usuário em mãos, faz uma nova requisição para a API de clima com base na latitude e longitude do usuário recebida pela requisição anterior
+        .then(data => fetch(`https://api.open-meteo.com/v1/forecast?latitude=${data.latitude}&longitude=${data.longitude}&current_weather=true`))
+        .then(response => response.json()) // converte a resposta em JSON de maneira assíncrona
+        .then(data => {
+          // com os dados recebidos, atualiza conteudo HTML correspondente à informação recebida 
+          document.getElementById("temp").textContent = data.current_weather.temperature + '°'; // temperatura
+          document.getElementById("wind").textContent = data.current_weather.windspeed + ' km/h'; // velocidade do vento
+        })
+        .catch(error => console.log(error));
+    }
+
+    window.onload = function () {
+      buscaClimaLocal(); // chama a função ao carregar a página
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+Utilizando minha chave de API, obtive os seguintes dados:
+
+Global Quote	
+01. symbol	"PETR4.SA"
+02. open	"35.8500"
+03. high	"36.0300"
+04. low	"35.5600"
+05. price	"35.9000"
+06. volume	"22986800"
+07. latest trading day	"2024-10-24"
+08. previous close	"35.6600"
+09. change	"0.2400"
+10. change percent	"0.6730%"
+
+Através da URL, é possível identificar que a requisição é um GET, porque os dados da requisição ficam na própria URL. 
+Sobre o json recebido, é possível identificar que ele retorna vários dados referentes à ação passada na URL.
+Para acessar os valores de cada chave: [nome_chave].

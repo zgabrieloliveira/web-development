@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Informação de Ações</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 1.5rem;
+            background-color: #ddd;
+            color: #555;
+            margin: 0;
+        }
+
+        main {
+            width: 60%;
+            margin: 0;
+            padding: 2% 4%;
+            background-color: #eee;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            font-size: 5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <label for="symbol">Digite o ticker (símbolo) da ação (Ex: PETR4)</label>
+        <input type="text" id="symbol" placeholder="Informe o símbolo da ação">
+        <button id="search">Buscar</button>
+        <section>
+            <h2>Informações da ação</h2>
+        </section>
+    </main>
+
+    <script>
+
+        function renderStockInfo(stockInfo) {
+            // Extrai os dados da ação
+            const symbol = stockInfo['01. symbol'];
+            const open = stockInfo['02. open'];
+            const high = stockInfo['03. high'];
+            const low = stockInfo['04. low'];
+            const price = stockInfo['05. price'];
+            const volume = stockInfo['06. volume'];
+            const latestTradingDay = stockInfo['07. latest trading day'];
+            const previousClose = stockInfo['08. previous close'];
+            const change = stockInfo['09. change'];
+            const changePercent = stockInfo['10. change percent'];
+
+            // Cria os elementos manualmente
+            const stockInfoDiv = document.createElement('div');
+
+            const title = document.createElement('h3');
+            title.textContent = `Informações da ação ${symbol}`;
+            stockInfoDiv.appendChild(title);
+
+            const openP = document.createElement('p');
+            openP.textContent = `Abertura: ${open}`;
+            stockInfoDiv.appendChild(openP);
+
+            const highP = document.createElement('p');
+            highP.textContent = `Máxima: ${high}`;
+            stockInfoDiv.appendChild(highP);
+
+            const lowP = document.createElement('p');
+            lowP.textContent = `Mínima: ${low}`;
+            stockInfoDiv.appendChild(lowP);
+
+            const priceP = document.createElement('p');
+            priceP.textContent = `Preço: ${price}`;
+            stockInfoDiv.appendChild(priceP);
+
+            const volumeP = document.createElement('p');
+            volumeP.textContent = `Volume: ${volume}`;
+            stockInfoDiv.appendChild(volumeP);
+
+            const latestTradingDayP = document.createElement('p');
+            latestTradingDayP.textContent = `Última negociação: ${latestTradingDay}`;
+            stockInfoDiv.appendChild(latestTradingDayP);
+
+            const previousCloseP = document.createElement('p');
+            previousCloseP.textContent = `Fechamento anterior: ${previousClose}`;
+            stockInfoDiv.appendChild(previousCloseP);
+
+            const changeP = document.createElement('p');
+            changeP.textContent = `Variação: ${change}`;
+            stockInfoDiv.appendChild(changeP);
+
+            const changePercentP = document.createElement('p');
+            changePercentP.textContent = `Variação percentual: ${changePercent}`;
+            stockInfoDiv.appendChild(changePercentP);
+
+            // Adiciona o div ao corpo ou a outro elemento pai
+            const stockSection = document.querySelector('section');
+            stockSection.innerHTML = '';
+            stockSection.appendChild(stockInfoDiv);
+        }
+
+        async function getStockInfoByTicker(apiKey, symbol) {
+
+            try {
+                // validando simbolo 
+                if (symbol.length == 0) {
+                    alert('Informe o símbolo da ação');
+                    return;
+                }
+
+                // limpando informações anteriores, se houver
+                const stockInfoDiv = document.querySelector('div');
+                if (stockInfoDiv != null) {
+                    stockInfoDiv.remove();
+                }
+
+                // envia simbolo na url todo maiusculo (formato padrão)
+                const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol.toUpperCase()}.SA&apikey=${apiKey}`;
+                const response1 = await fetch(url); // envia requisição GET
+                if (!response1.ok) throw new Error(response1.statusText);
+                const stock = await response1.json();
+
+                if (stock['Information']) {
+                    alert('Recurso diário máximo atingido!');
+                    return;
+                }
+
+                if (stock == undefined || stock['Global Quote'] == undefined) {
+                    alert('Ação não encontrada');
+                    return;
+                }
+
+                renderStockInfo(stock['Global Quote']);
+
+
+            }
+            catch (error) {
+                console.log(error);
+                alert('Não foi possível obter informações da ação');
+            }
+        }
+
+        window.onload = function () {
+            const apiKey = 'TWDLHZ09O8RSO3YA';
+            const searchButton = document.getElementById("search");
+            searchButton.addEventListener("click", function () {
+                const symbol = document.getElementById("symbol").value;
+                getStockInfoByTicker(apiKey, symbol);
+            });
+        }
+
+
+    </script>
+
+</body>
+
+</html>

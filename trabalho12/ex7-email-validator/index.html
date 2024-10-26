@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Informação de Ações</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 1.5rem;
+            background-color: #ddd;
+            color: #555;
+            margin: 0;
+        }
+
+        main {
+            width: 60%;
+            margin: 0;
+            padding: 2% 4%;
+            background-color: #eee;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            font-size: 5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <label for="email">Digite o email</label>
+        <input type="email" id="email" placeholder="mail@gmail.com">
+        <button id="search">Buscar</button>
+        <span id="message"></span>
+    </main>
+
+    <script>
+
+        // essa pagina tem a função de validar um email através de uma API que identifica seu formato e se é descartável
+        // essas duas caracteristicas sao booleanos no json retornado 
+
+        // essa função faz requisição a API e pega o json de resposta
+        async function validateEmail(apiKey, email) {
+
+            try {
+
+                // reseta mensagem de validação
+                messageSpan = document.getElementById('message');
+                messageSpan.textContent = '';
+
+                // validando simbolo 
+                if (email.length == 0) {
+                    messageSpan.textContent = 'Email não pode ser vazio';
+                    messageSpan.style.color = 'red';
+                    return;
+                }
+
+                // envia simbolo na url todo maiusculo (formato padrão)
+                const url = `https://www.disify.com/api/email/${email}`;
+
+                const response1 = await fetch(url); // envia requisição GET
+                if (!response1.ok) throw new Error(response1.statusText);
+                const jsonReceived = await response1.json()
+
+                showEmailValidation(jsonReceived, messageSpan);
+
+            }
+            catch (error) {
+                console.log(error);
+                alert('Não foi possível obter informações' + error);
+            }
+        }
+
+        // função que mostra a mensagem de validação do email conforme resposta da API
+        function showEmailValidation(jsonReceived, messageSpan) {
+            // verifica se o email é valido: ele não é descartável e está no formato correto
+
+            disposable = jsonReceived.disposable;
+            format = jsonReceived.format;
+
+            if (disposable == true) {
+                messageSpan.textContent = 'Email inválido: descartável';
+                messageSpan.style.color = 'red';
+                return
+            }
+            if (format == false) {
+                messageSpan.textContent = 'Email inválido: formato inválido';
+                messageSpan.style.color = 'red';
+                return
+            }
+            // se não for descartável e estiver no formato correto, é um email válido
+            else {
+                messageSpan.textContent = 'Email válido';
+                messageSpan.style.color = 'green';
+            }
+
+        }
+
+        window.onload = function () {
+            const apiKey = '960015f7768433ef353d60b0f387db1d0f9c06464c53846ae157832d3da2ddef';
+            const searchButton = document.getElementById("search");
+            searchButton.addEventListener("click", function () {
+                const email = document.getElementById("email").value;
+                validateEmail(apiKey, email);
+            });
+        }
+
+
+    </script>
+
+</body>
+
+</html>
