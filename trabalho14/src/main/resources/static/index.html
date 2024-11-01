@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>API RESTful</title>
+
+    <style>
+        .addresses {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <main class="container mt-5">
+        <h3>Testando API RESTful</h3>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="cep">CEP</label>
+                <input type="text" class="form-control" id="cep" placeholder="Digite o CEP">
+            </div>
+            <div class="form-group">
+                <label for="rua">Rua</label>
+                <input type="text" class="form-control" id="rua" placeholder="Digite a rua">
+            </div>
+            <div class="form-group">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="form-control" id="bairro" placeholder="Digite o bairro">
+            </div>
+            <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input type="text" class="form-control" id="cidade" placeholder="Digite a cidade">
+            </div>
+            
+            <section class="addresses">
+                <h2>Endereços</h2>
+                <ul class="list-group"></ul>
+                <button type="button">Fechar</button>
+            </section>
+
+            <button type="button" class="btn btn-outline-dark btn-block" id="find-address">Buscar endereço pelo CEP (GET)</button>
+            <button type="submit" class="btn btn-outline-dark btn-block">Criar novo (POST)</button>
+            <button type="button" class="btn btn-outline-dark btn-block">Apagar pelo CEP (DELETE)</button>
+            <button type="button" class="btn btn-outline-dark btn-block">Listar todos os endereços</button>
+        </form>
+    </div>
+
+    <script>
+
+        const url = 'http://localhost:8080/address';
+
+        // função utilitária para enviar requisições e receber a resposta, promovendo reuso de código
+        // options={} é um valor padrão caso options não seja fornecido
+        async function sendRequest(url, options = {}) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    return await response.json();
+                } else {
+                    return await response.text();
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                throw error;
+            }
+        }
+
+        async function findAddressByCep() {
+            const cep = document.querySelector('#cep').value; // pegando campo do CEP
+            const rua = document.querySelector('#rua');
+            const bairro = document.querySelector('#bairro');
+            const cidade = document.querySelector('#cidade');
+            // limpando campos para atualização
+            rua.value = '';
+            bairro.value = '';
+            cidade.value = '';
+
+            // validando CEP
+            if (cep.length !== 8) {
+                alert('CEP inválido');
+                return;
+            }
+            
+
+            try {
+                // enviando requisição para o servidor via API Fetch
+                const response = await sendRequest(`${url}/${cep}`);
+                // atribuindo resultados obtidos a cada campo do formulário para auto-preenchimento
+                rua.value = response.rua;
+                bairro.value = response.bairro;
+                cidade.value = response.cidade;
+            } catch (error) {
+                console.log(error);
+                alert('Ocorreu um erro ao realizar essa operação');
+            }    
+
+        }
+
+        async function createNewAddress(e) {
+            e.preventDefault();
+            const cep = document.querySelector('#cep').value;
+            const rua = document.querySelector('#rua').value;
+            const bairro = document.querySelector('#bairro').value;
+            const cidade = document.querySelector('#cidade').value;
+
+            // validando campos
+            if (cep.length !== 8 || cidade.length === 0) {
+                alert('Preencha todos os campos corretamente! O CEP deve ter 8 dígitos e a cidade deve ser preenchida');
+                return;
+            }
+
+            const requestOptions = {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    cep,
+                    rua,
+                    bairro,
+                    cidade
+                })
+            };
+
+            try {
+                // enviando dados para o servidor e esperando resposta via API Fetch
+                const response = await sendRequest(`${url}`, requestOptions);
+                alert(response);
+            } catch (error) {
+                console.log(error);
+                alert('Ocorreu um erro ao realizar essa operação');
+            }
+        
+        }
+
+        async function deleteAddressByCep(e) {
+            e.preventDefault();
+            const cep = document.querySelector('#cep').value;
+
+            // validando CEP
+            if (cep.length !== 8) {
+                alert('CEP inválido');
+                return;
+            }
+
+            const requestOptions = {
+                method: 'DELETE'
+            };
+            try {
+                // enviando requisição para o servidor via API Fetch
+                const response = await sendRequest(`${url}/${cep}`, requestOptions);
+                alert(response);
+            } catch(error) {
+                console.log(error);
+                alert('Ocorreu um erro ao realizar essa operação');
+            }
+        }
+
+        async function listAddresses(e) {
+            e.preventDefault();
+            // enviando requisição para o servidor via API Fetch
+            const response = await sendRequest(`${url}`);
+            showAllAddresses(response);
+        }
+
+        function showAllAddresses(addresses) {
+            // pega ul e limpa seu html para mostrar dados atualizados (parâmetro dessa função)
+            const addressList = document.querySelector('.addresses > ul');
+            addressList.innerHTML = '';
+
+            // iterando sobre cada endereço e criando um item de lista para cada um
+            for (let address of addresses) {
+                const li = document.createElement('li');
+                li.textContent = `${address.rua}, ${address.bairro}, ${address.cidade}`;
+                addressList.appendChild(li);
+            }
+
+            document.querySelector('.addresses').style.display = 'block';
+        }
+
+        function hideAddressList() {
+            document.querySelector('.addresses').style.display = 'none';
+        }
+
+        // atribuindo função de criação de novo endereço ao formulário
+        document.querySelector('form').onsubmit = createNewAddress;
+        // atribuindo funções a cada botão via nth-of-type (2, 3, 4)
+        document.querySelector('#find-address').onclick = findAddressByCep;
+        document.querySelector('button:nth-of-type(3)').onclick = deleteAddressByCep;
+        document.querySelector('button:nth-of-type(4)').onclick = listAddresses;
+        // na seção com a lista de endereços, terá um botão pra fechar ela
+        document.querySelector('.addresses > button').onclick = hideAddressList;
+
+    </script>
+
+</body>
+
+</html>
